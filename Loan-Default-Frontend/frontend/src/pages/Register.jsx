@@ -33,7 +33,7 @@ export default function Register({ nav, login }) {
     if (password.length < 6) { setError("Password must be at least 6 characters"); return; }
     setLoading(true); setError("");
     try {
-      const r = await fetch("http://localhost:5000/api/auth/register", {
+      const r = await fetch("https://loan-ml-production.up.railway.app/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),

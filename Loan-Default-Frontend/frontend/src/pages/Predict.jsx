@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 
-const API = "http://localhost:5000";
+const API = "https://loan-ml-production.up.railway.app";
 
 function focusIn(e)  { e.target.style.borderColor="#6366f1"; e.target.style.boxShadow="0 0 0 3px rgba(99,102,241,0.13)"; }
 function focusOut(e) { e.target.style.borderColor="rgba(255,255,255,0.1)"; e.target.style.boxShadow="none"; }

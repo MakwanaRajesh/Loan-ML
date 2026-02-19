@@ -9,7 +9,7 @@ import About from "./pages/About";
 import Help from "./pages/Help";
 import Contact from "./pages/Contact";
 
-const API = "http://localhost:5000";
+const API = "https://loan-ml-production.up.railway.app";
 
 export default function App() {
   const [page, setPage]   = useState("landing");

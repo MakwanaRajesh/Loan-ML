@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 
-const API = "http://localhost:5000";
+const API = "https://loan-ml-production.up.railway.app";
 
 export default function Dashboard({ nav, user, token, logout }) {
   const [stats,   setStats]   = useState(null);

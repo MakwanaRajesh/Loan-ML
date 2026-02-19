@@ -316,5 +316,5 @@ def unprocessable(_):
 # ─── Entry ────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     print("\n🚀 LoanPredict API starting...")
-    print("   http://localhost:5000\n")
+    print("   https://loan-ml-production.up.railway.app\n")
     app.run(debug=True, host="127.0.0.1", port=5000)
