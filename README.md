@@ -1,61 +1,77 @@
-# 🏦 LoanPredict — Full Stack Loan Approval Prediction System
+# 🏦 Loan Default Prediction System (Full-Stack ML Project)
 
-LoanPredict is a **Full Stack Machine Learning Web Application** that predicts whether a loan will be **Approved or Rejected** based on applicant details. It integrates a trained ML model with a secure backend and a modern frontend dashboard.
+A full-stack Machine Learning web application that predicts whether a loan applicant is likely to default or not. This system helps financial institutions make smarter lending decisions using Machine Learning.
 
-This project demonstrates real-world implementation of:
-
-* Machine Learning Model Deployment
-* REST API Development
-* Authentication using JWT
-* Database Integration
-* Full Stack Application Development
+🌐 **Live Demo:** https://loan-predict-nine.vercel.app/
 
 ---
 
-# 🚀 Live Features
+# 📌 Project Overview
 
-## 👤 User Features
+The Loan Default Prediction System uses a trained Machine Learning model integrated into a full-stack web application. Users can register, log in, enter loan details, and instantly receive a prediction.
 
-* User Registration & Login (Secure JWT Authentication)
-* Loan Approval Prediction using ML Model
-* Prediction History Tracking
-* User Dashboard
-* Modern and responsive UI
+This project demonstrates:
 
-## 🤖 Machine Learning Features
+* Machine Learning model development
+* Backend API development
+* JWT authentication
+* Database integration
+* Frontend development
+* Full deployment (Frontend + Backend)
 
-* Trained Loan Approval Prediction Model
-* Real-time predictions via API
-* Uses Scikit-Learn trained model (`loan_model.pkl`)
-* Handles user input and converts to ML-ready format
+---
 
-## 🔐 Security Features
+# 🚀 Features
 
-* Password hashing using bcrypt
+## 👤 User Authentication
+
+* User registration
+* User login
+* Secure password hashing using bcrypt
 * JWT-based authentication
-* Protected API routes
-* Secure database storage
+
+## 🤖 Machine Learning Prediction
+
+* Predict loan default risk
+* Real-time prediction using trained ML model
+* Fast and accurate predictions
+
+## 📊 Dashboard & History
+
+* View prediction history
+* Track previous predictions
+* User-specific data storage
+
+## 🌐 Full Stack Deployment
+
+* Frontend deployed on Vercel
+* Backend API deployed
+* Production-ready architecture
 
 ---
 
-# 🧠 Machine Learning Model
+# 🧠 Machine Learning Details
 
-The ML model predicts loan approval based on:
+## Model Used
 
-* Age
-* Income
-* Loan Amount
-* Credit Score
-* Employment Status
-* Marital Status
-* Education
-* Employment Type
+* Random Forest Classifier
 
-### ML Stack Used
+## Libraries Used
 
-* Scikit-Learn
-* Pandas
-* Joblib / Pickle
+* scikit-learn
+* pandas
+* numpy
+* pickle
+
+## ML Workflow
+
+1. Data collection
+2. Data preprocessing
+3. Feature selection
+4. Model training
+5. Model evaluation
+6. Model saving using pickle
+7. Backend integration
 
 ---
 
@@ -64,134 +80,84 @@ The ML model predicts loan approval based on:
 ## Frontend
 
 * React.js (Vite)
-* JavaScript
 * HTML5
 * CSS3
+* JavaScript
+* Axios
 
 ## Backend
 
+* Python
 * Flask
 * Flask-JWT-Extended
 * Flask-SQLAlchemy
-* Flask-CORS
+* bcrypt
 
 ## Database
 
-* SQLite (can be upgraded to MySQL/PostgreSQL)
+* SQLite
 
 ## Machine Learning
 
-* Scikit-Learn
-* Pandas
-* Joblib
+* scikit-learn
+* pandas
+* numpy
+
+## Deployment
+
+* Frontend: Vercel
+* Backend: Flask API
 
 ---
 
-# 📁 Project Structure
+# 📂 Project Structure
 
 ```
-loan_project/
+LoanPredict_FullStack/
 │
 ├── backend/
 │   ├── app.py
-│   ├── requirements.txt
 │   ├── loan_model.pkl
-│   └── .env.example
+│   ├── requirements.txt
+│   ├── loanpredict.db
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── pages/
-│   │   ├── components/
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   │
+│   ├── public/
 │   ├── package.json
-│   └── vite.config.js
 │
 └── README.md
 ```
 
 ---
 
-# ⚙️ Backend Installation
+# ⚙️ Installation & Setup
 
-## Step 1: Go to backend folder
+## Backend Setup
 
 ```
 cd backend
-```
-
-## Step 2: Create virtual environment
-
-```
-python -m venv venv
-```
-
-Activate environment:
-
-Windows:
-
-```
-venv\Scripts\activate
-```
-
-Mac/Linux:
-
-```
-source venv/bin/activate
-```
-
-## Step 3: Install dependencies
-
-```
 pip install -r requirements.txt
-```
-
-## Step 4: Place trained model
-
-Place:
-
-```
-loan_model.pkl
-```
-
-inside backend folder.
-
-## Step 5: Run backend server
-
-```
 python app.py
 ```
 
-Server runs at:
+Backend runs on:
 
 ```
-http://localhost:5000
+http://127.0.0.1:5000
 ```
 
 ---
 
-# ⚙️ Frontend Installation
-
-## Step 1: Go to frontend folder
+## Frontend Setup
 
 ```
 cd frontend
-```
-
-## Step 2: Install dependencies
-
-```
 npm install
-```
-
-## Step 3: Run frontend
-
-```
 npm run dev
 ```
 
-Frontend runs at:
+Frontend runs on:
 
 ```
 http://localhost:5173
@@ -199,157 +165,122 @@ http://localhost:5173
 
 ---
 
-# 🔌 API Endpoints
+# 🔐 API Endpoints
 
 ## Authentication
 
-### Register
+Register
 
 ```
-POST /register
+POST /api/auth/register
 ```
 
-### Login
+Login
 
 ```
-POST /login
+POST /api/auth/login
+```
+
+Get User
+
+```
+GET /api/auth/me
 ```
 
 ---
 
 ## Prediction
 
-### Predict Loan Approval
+Predict Loan Default
 
 ```
-POST /predict
+POST /api/predict
 ```
-
-Requires JWT Token
 
 ---
 
 ## History
 
-### Get Prediction History
+Get History
 
 ```
-GET /history
+GET /api/history
 ```
 
-Requires JWT Token
-
----
-
-# 🧪 Example Prediction Input
+Delete History
 
 ```
-{
-  "age": 25,
-  "income": 50000,
-  "loan_amount": 200000,
-  "credit_score": 720,
-  "employment_status": "Employed",
-  "education": "Bachelor",
-  "marital_status": "Single"
-}
+DELETE /api/history/{id}
 ```
 
 ---
 
-# 📊 How It Works
+# 📈 Model Input Features
 
-1. User registers and logs in
-2. JWT token is generated
-3. User enters loan details
-4. Backend sends data to ML model
-5. Model predicts loan approval
-6. Result is saved in database
-7. User can view prediction history
-
----
-
-# 💾 Database Tables
-
-## Users Table
-
-* id
-* name
-* email
-* password
-
-## Predictions Table
-
-* id
-* user_id
-* input data
-* prediction result
-* timestamp
+* Age
+* Income
+* Loan Amount
+* Credit Score
+* Employment Status
+* Gender
 
 ---
 
-# 🌍 Deployment Options
+# 🎯 Prediction Output
 
-You can deploy using:
+* Safe (Loan Approved)
+* Risky (Loan Default Risk)
+
+---
+
+# 🔒 Security Features
+
+* JWT Authentication
+* Password Hashing using bcrypt
+* Secure API endpoints
+
+---
+
+# 🌐 Live Deployment
 
 Frontend:
-
-* Vercel
-* Netlify
-* Railway
+https://loan-predict-nine.vercel.app/
 
 Backend:
-
-* Railway
-* Render
-* AWS
-* PythonAnywhere
-
-Database:
-
-* SQLite (local)
-* MySQL
-* PostgreSQL
-
----
-
-# 🎯 Learning Outcomes
-
-This project demonstrates:
-
-* ML Model Deployment
-* Full Stack Development
-* Authentication & Security
-* API Development
-* Database Integration
-* Production-ready Architecture
-
----
-
-# 🔮 Future Improvements
-
-* Deploy ML model using Docker
-* Use PostgreSQL database
-* Add Admin Dashboard
-* Add Model Accuracy Display
-* Improve UI/UX
-* Add more ML features
+Flask API deployed
 
 ---
 
 # 👨‍💻 Author
 
-**Rajesh Makwana**
+Rajesh Makwana
 
-B.Tech Software Engineering Student
+B.Tech Computer Engineering Student
 Machine Learning & Full Stack Developer
 
-GitHub: https://github.com/MakwanaRajesh
+---
+
+# 🎓 Project Purpose
+
+This project was developed for:
+
+* Machine Learning learning
+* Full Stack Development practice
+* Placement portfolio
+* Real-world ML application implementation
 
 ---
 
-# ⭐ If you like this project
+# ⭐ Future Improvements
 
-Please give it a ⭐ on GitHub!
+* Improve model accuracy
+* Add more features
+* Use PostgreSQL database
+* Deploy backend on cloud (Render / Railway / AWS)
+* Add admin dashboard
 
 ---
+
+# 📜 License
+
+This project is for educational and portfolio purposes.
