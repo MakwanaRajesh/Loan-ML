@@ -38,18 +38,30 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=24)
 db  = SQLAlchemy(app)
 jwt = JWTManager(app)
 
+# CORS(
+#     app,
+#     resources={
+#         r"/*": {
+#             "origins": [
+#                 "http://localhost:5173",
+#                 "http://localhost:3000",
+#                 "http://127.0.0.1:5173",
+#                 "http://127.0.0.1:3000",
+#             ]
+#         }
+#     },
+# )
 CORS(
     app,
     resources={
         r"/*": {
             "origins": [
                 "http://localhost:5173",
-                "http://localhost:3000",
-                "http://127.0.0.1:5173",
-                "http://127.0.0.1:3000",
+                "https://loan-predict-nine.vercel.app"
             ]
         }
     },
+    supports_credentials=True
 )
 
 
@@ -317,4 +329,4 @@ def unprocessable(_):
 if __name__ == "__main__":
     print("\n🚀 LoanPredict API starting...")
     print("   https://loan-ml-production.up.railway.app\n")
-    app.run(debug=True, host="127.0.0.1", port=5000)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
