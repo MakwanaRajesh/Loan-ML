@@ -25,6 +25,8 @@ from flask_jwt_extended import (
 )
 from flask_sqlalchemy import SQLAlchemy
 
+import glob
+
 # ─── App Setup ───────────────────────────────────────────────────────────────
 app = Flask(__name__)
 
@@ -117,17 +119,59 @@ class Prediction(db.Model):
 
 
 # ─── Load ML Model ────────────────────────────────────────────────────────────
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "loan_model.pkl")
-model = None
+# MODEL_PATH = os.path.join(os.path.dirname(__file__), "loan_model.pkl")
+# model = None
 
-try:
-    with open(MODEL_PATH, "rb") as f:
-        model = pickle.load(f)
-    print(f"✅ Model loaded from: {MODEL_PATH}")
-except FileNotFoundError:
-    print("❌  loan_model.pkl not found — place it in the backend/ folder")
-except Exception as exc:
-    print(f"❌  Error loading model: {exc}")
+# try:
+#     with open(MODEL_PATH, "rb") as f:
+#         model = pickle.load(f)
+#     print(f"✅ Model loaded from: {MODEL_PATH}")
+# except FileNotFoundError:
+#     print("❌  loan_model.pkl not found — place it in the backend/ folder")
+# except Exception as exc:
+#     print(f"❌  Error loading model: {exc}")
+
+
+
+# ─── Load ML Model (Split-Merge Logic) ────────────────────────────────────────
+def load_merged_model():
+    base_name = "loan_model.pkl"
+    temp_full = "temp_full_model.pkl"
+    
+    # Check for split parts (loan_model.pkl.part0, .part1, etc.)
+    parts = sorted(glob.glob(f"{base_name}.part*"))
+    
+    if parts:
+        print(f"📦 Found {len(parts)} model parts. Merging...")
+        with open(temp_full, "wb") as outfile:
+            for part in parts:
+                with open(part, "rb") as infile:
+                    outfile.write(infile.read())
+        
+        with open(temp_full, "rb") as f:
+            loaded_model = pickle.load(f)
+        
+        # Clean up temporary file to save cloud disk space
+        if os.path.exists(temp_full):
+            os.remove(temp_full)
+        return loaded_model
+    
+    # If no parts, try to load single file (local dev)
+    elif os.path.exists(base_name):
+        with open(base_name, "rb") as f:
+            return pickle.load(f)
+    
+    return None
+
+model = load_merged_model()
+
+if model:
+    print("✅ Model loaded successfully!")
+else:
+    print("❌ Model files not found. Ensure loan_model.pkl.partX files exist.")
+
+
+
 
 
 # ─── Init DB ──────────────────────────────────────────────────────────────────
