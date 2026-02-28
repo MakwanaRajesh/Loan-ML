@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🔮 LoanPredict — Full Stack AI Loan Risk App
 
 Built by **Hurii** | [Instagram](https://instagram.com/rajesh_1oo3) · [LinkedIn](https://www.linkedin.com/in/rajesh-makwana-397913328)
